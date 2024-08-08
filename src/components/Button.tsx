@@ -12,7 +12,7 @@ interface ButtonProps {
     | "secondary"
     | "white-outlined"
     | "danger";
-  className?: string;
+  className?: any;
 }
 
 type PropsWithChildren = React.PropsWithChildren<ButtonProps>;
@@ -48,7 +48,7 @@ const Button: React.FC<PropsWithChildren> = ({
         <motion.button
           whileHover={{ scale: 1.05 }}
           transition={{ delay: 0.2, duration: 0.2 }}
-          className={`montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-primaryblue px-[4vh] py-[2vh] rounded-[4px] w-fit border-none rounded-[6px] text-white text-[16px] ${className}`}
+          className={`${className} montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-primaryblue px-[4vh] py-[2vh] rounded-[4px] w-fit border-none rounded-[6px] text-white text-[16px]`}
           onClick={onClick}
         >
           {children}
@@ -59,7 +59,7 @@ const Button: React.FC<PropsWithChildren> = ({
         <motion.button
           whileHover={{ scale: 1.01 }}
           transition={{ delay: 0.2, duration: 0.2 }}
-          className={`montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-white px-[4vh] py-[2vh] rounded-[4px] w-fit border-[1px] border-solid border-extralight rounded-[6px] text-black text-[16px] ${className}`}
+          className={`${className} montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-white px-[4vh] py-[2vh] rounded-[4px] w-fit border-[1px] border-solid border-extralight rounded-[6px] text-black text-[16px]`}
           onClick={onClick}
         >
           {children}
