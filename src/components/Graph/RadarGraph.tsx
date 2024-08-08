@@ -12,7 +12,7 @@ const RadarGraph = ({ graphData }: RadarGraphProps) => {
     labels: labels,
     datasets: [
       {
-        label: "My First Dataset",
+        label: "Data",
         data: graphData?.map(({ data }: any) => data),
         fill: true,
         backgroundColor: graphData?.map((item: any, index: any) => {

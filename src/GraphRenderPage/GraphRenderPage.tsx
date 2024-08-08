@@ -10,6 +10,7 @@ import { useFieldArray, useForm } from "react-hook-form";
 const GraphRenderPage = () => {
   type types = "types";
   const [currentGraphType, setCurrentGraphType] = useState<any>();
+  const [isSideBarExtended, setIsSideBarExtended] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -48,6 +49,8 @@ const GraphRenderPage = () => {
         remove={remove}
         currentGraphType={currentGraphType}
         reset={reset}
+        setIsSideBarExtended={setIsSideBarExtended}
+        isSideBarExtended={isSideBarExtended}
       />
       <div className="w-[77%]">
         <TopGraphOptionBar

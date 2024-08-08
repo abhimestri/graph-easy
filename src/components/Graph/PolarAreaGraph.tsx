@@ -12,7 +12,7 @@ const PolarAreaGraph = ({ graphData }: PolarAreaGraphProps) => {
     labels: labels,
     datasets: [
       {
-        label: "My First dataset",
+        label: "Data",
         backgroundColor: graphData?.map((item: any, index: any) => {
           if (item[index]) {
             return item[index];

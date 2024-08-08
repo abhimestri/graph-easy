@@ -31,8 +31,7 @@ const LineGraph = ({ graphData }: LineGraphProps) => {
     labels: labels,
     datasets: [
       {
-        label: "My First dataset",
-
+        label: "Data",
         data: graphData?.map(({ data }: any) => data),
         backgroundColor: graphData?.map((item: any, index: any) => {
           if (item[index]) {

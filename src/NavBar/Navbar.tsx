@@ -20,7 +20,7 @@ const NavBar = () => {
       >
         <motion.li
           initial={{ fontWeight: 400 }}
-          whileHover={{ fontWeight: 600 }}
+          whileHover={{ fontWeight: 500, scale: 1.04 }}
           transition={{ delay: 0.2, duration: 0.1 }}
           className="cursor-pointer "
         >
@@ -28,7 +28,7 @@ const NavBar = () => {
         </motion.li>
         <motion.li
           initial={{ fontWeight: 400 }}
-          whileHover={{ fontWeight: 600 }}
+          whileHover={{ fontWeight: 500, scale: 1.04 }}
           transition={{ delay: 0.2, duration: 0.1 }}
           className="cursor-pointer "
           onClick={() => navigate("/create-graph")}
@@ -37,7 +37,7 @@ const NavBar = () => {
         </motion.li>
         <motion.li
           initial={{ fontWeight: 400 }}
-          whileHover={{ fontWeight: 600 }}
+          whileHover={{ fontWeight: 500, scale: 1.04 }}
           transition={{ delay: 0.2, duration: 0.1 }}
           className="cursor-pointer "
         >

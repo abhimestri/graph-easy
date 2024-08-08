@@ -11,7 +11,7 @@ const BarGraph = ({ graphData }: BarGraphProps) => {
     labels: labels,
     datasets: [
       {
-        label: "My First dataset",
+        label: "Data",
         data: graphData?.map(({ data }: any) => data),
         backgroundColor: graphData?.map((item: any, index: any) => {
           if (item[index]) {
@@ -19,7 +19,7 @@ const BarGraph = ({ graphData }: BarGraphProps) => {
           } else {
             return (item[index] = randomColor({
               luminosity: "bright",
-              format: "rgba",
+              format: "rgb",
             }));
           }
         }),

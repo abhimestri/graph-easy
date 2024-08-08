@@ -1,19 +1,15 @@
-import { motion, useScroll } from "framer-motion";
-import BarImg from "../assets/bar.jpg";
-import DoughnutImg from "../assets/doughnut.jpg";
-import LineImg from "../assets/line.jpg";
-import ScatterImg from "../assets/scatter.jpg";
+import { motion } from "framer-motion";
+import BarImg from "../assets/bar.png";
+import DoughnutImg from "../assets/doughnut.png";
+import LineImg from "../assets/line.png";
+import ScatterImg from "../assets/scatter.png";
 import { useRef } from "react";
 
 const MainContent = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["0 1", "1.33 1"],
-  });
 
   return (
-    <div className="px-[26px] mt-[6vh]">
+    <div className="px-[26px] mt-[6vh] mb-[20vh]">
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -31,34 +27,54 @@ const MainContent = () => {
         className="flex justify-center gap-x-[24vh] items-center mt-[20vh]"
       >
         <div className="grid grid-cols-2 gap-4">
-          <motion.img
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            src={BarImg}
-            className="aspect-square max-w-[30vh] max-h-[30vh] rounded-[12px]"
-          />
-          <motion.img
+            className="border-extralight border-[1px] border-solid m-0 rounded-[10px]"
+          >
+            <img
+              src={BarImg}
+              className="aspect-square max-w-[30vh] max-h-[30vh]"
+              alt=""
+            />
+          </motion.div>
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            src={DoughnutImg}
-            className="aspect-square max-w-[30vh] max-h-[30vh] mt-[50px] rounded-[12px]"
-          />
-          <motion.img
+            className="relative border-extralight border-[1px] border-solid top-12 rounded-[10px]"
+          >
+            <img
+              alt=""
+              src={DoughnutImg}
+              className="aspect-square max-w-[30vh] max-h-[30vh] rounded-[12px]"
+            />
+          </motion.div>
+          <motion.div
             initial={{ opacity: 0, y: 20, scale: 1 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            src={LineImg}
-            className="aspect-square max-w-[30vh] max-h-[30vh] mt-[-50px] rounded-[12px]"
-          />
-          <motion.img
+            className="border-extralight border-[1px] border-solid rounded-[10px]"
+          >
+            <img
+              alt=""
+              src={LineImg}
+              className="aspect-square max-w-[30vh] max-h-[30vh]"
+            />
+          </motion.div>
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            src={ScatterImg}
-            className="aspect-square max-w-[30vh] max-h-[30vh] rounded-[12px]"
-          />
+            className="relative border-extralight border-[1px] border-solid top-12  rounded-[10px]"
+          >
+            <img
+              alt=""
+              src={ScatterImg}
+              className="aspect-square max-w-[30vh] max-h-[30vh]"
+            />
+          </motion.div>
         </div>
         <div className="max-w-[46vw] ">
           <motion.p
