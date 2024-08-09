@@ -35,8 +35,8 @@ const SideBarForm = ({
 }: SideBarFormProps) => {
   return (
     <motion.div
-      initial={{ width: "22%" }}
-      animate={{ width: isSideBarExtended ? "22%" : "5%" }}
+      initial={{ width: "23%" }}
+      animate={{ width: isSideBarExtended ? "23%" : "5%" }}
       transition={{ delay: 0.2, duration: 0.5 }}
       className="h-[100vh] px-[8px] py-[8px] border-r-[1px] border-solid border-extralight"
     >
@@ -134,7 +134,7 @@ const SideBarForm = ({
                   onChange={handleFileUpload}
                 />
                 <label htmlFor="file-upload" className="cursor-pointer">
-                  Uploas Exceel
+                  Upload Excel
                 </label>
               </motion.p>
             </Button>
