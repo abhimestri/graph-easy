@@ -4,8 +4,9 @@ import TopGraphOptionBar from "./TopGraphOptionBar";
 import SideBarForm from "./SideBarForm";
 import Graph from "../components/Graph/Graph";
 import Home from "../assets/Home.svg";
-import { GraphTypes } from "../utility/utility";
+import { GraphTypes, parseExcelData } from "../utility/utility";
 import { useFieldArray, useForm } from "react-hook-form";
+import * as XLSX from "xlsx";
 
 const GraphRenderPage = () => {
   type types = "types";
@@ -14,7 +15,7 @@ const GraphRenderPage = () => {
 
   const navigate = useNavigate();
 
-  const { register, control, watch, getValues, reset } = useForm({
+  const { register, control, watch, getValues, reset, setValue } = useForm({
     defaultValues: {
       dataValues: [
         {
@@ -34,6 +35,19 @@ const GraphRenderPage = () => {
     setCurrentGraphType(type);
   };
 
+  const handleFileUpload = async (e: any) => {
+    const fileData = e.target.files[0];
+    const data = await fileData.arrayBuffer();
+    const workbook = XLSX.read(data);
+    const finalDt = parseExcelData(workbook);
+    finalDt?.scrappedData?.map((dt: any, i: any) => {
+      setValue(`dataValues.${i}.data`, dt.data);
+      setValue(`dataValues.${i}.label`, dt.label);
+      append(dt);
+    });
+    e.target.value = null;
+  };
+
   return (
     <div className="flex">
       <div
@@ -51,6 +65,7 @@ const GraphRenderPage = () => {
         reset={reset}
         setIsSideBarExtended={setIsSideBarExtended}
         isSideBarExtended={isSideBarExtended}
+        handleFileUpload={handleFileUpload}
       />
       <div className="w-[77%]">
         <TopGraphOptionBar

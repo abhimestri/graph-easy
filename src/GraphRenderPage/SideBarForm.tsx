@@ -19,6 +19,7 @@ interface SideBarFormProps {
   reset: any;
   setIsSideBarExtended: (data: boolean) => void;
   isSideBarExtended?: boolean;
+  handleFileUpload: (e?: any) => void;
 }
 
 const SideBarForm = ({
@@ -30,13 +31,14 @@ const SideBarForm = ({
   reset,
   isSideBarExtended,
   setIsSideBarExtended,
+  handleFileUpload,
 }: SideBarFormProps) => {
   return (
     <motion.div
-      initial={{ width: "23%" }}
-      animate={{ width: isSideBarExtended ? "23%" : "5%" }}
+      initial={{ width: "22%" }}
+      animate={{ width: isSideBarExtended ? "22%" : "5%" }}
       transition={{ delay: 0.2, duration: 0.5 }}
-      className={`h-[100vh] px-[8px] py-[8px] border-r-[1px] border-solid border-extralight`}
+      className="h-[100vh] px-[8px] py-[8px] border-r-[1px] border-solid border-extralight"
     >
       {isSideBarExtended ? (
         <div className="w-full h-fit flex justify-between">
@@ -51,13 +53,18 @@ const SideBarForm = ({
       ) : (
         <div
           onClick={() => setIsSideBarExtended(!isSideBarExtended)}
-          className="p-0 flex justify-center"
+          className="p-0 flex justify-center cursor-pointer"
         >
           <RightArrow style={{ padding: 0 }} />
         </div>
       )}
       {isSideBarExtended ? (
-        <div className="text-center montserrat text-2xl py-4 px-6">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isSideBarExtended ? 1 : 0 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
+          className="text-center montserrat text-2xl py-4 px-6"
+        >
           <Button
             onClick={() => null}
             variant="white-outlined"
@@ -72,7 +79,7 @@ const SideBarForm = ({
               Expand data table
             </motion.p>
           </Button>
-        </div>
+        </motion.div>
       ) : (
         <div className="flex justify-center mt-8">
           <Button
@@ -106,13 +113,13 @@ const SideBarForm = ({
           columns={[]}
         />
       </motion.div>
-      <div className="absolute top-[90%] flex justify-center mt-[8px] gap-x-6">
+      <div className="flex justify-center absolute top-[90%] mt-[8px] gap-x-6">
         {isSideBarExtended ? (
           <>
             <Button
               variant={"primary"}
               onClick={() => null}
-              className="px-3 py-4"
+              className="px-[2vh] py-[1px]"
             >
               <motion.p
                 initial={{ opacity: 0 }}
@@ -120,7 +127,15 @@ const SideBarForm = ({
                 transition={{ delay: 0.1, duration: 0.4 }}
                 className="p-0 m-0"
               >
-                Upload sheet
+                <input
+                  id="file-upload"
+                  type="file"
+                  hidden
+                  onChange={handleFileUpload}
+                />
+                <label htmlFor="file-upload" className="cursor-pointer">
+                  Uploas Exceel
+                </label>
               </motion.p>
             </Button>
             <Button
@@ -132,7 +147,11 @@ const SideBarForm = ({
             </Button>
           </>
         ) : (
-          <Button variant="primary" onClick={() => null} className="!p-2">
+          <Button
+            variant="primary"
+            onClick={() => null}
+            className="!p-2 ml-[16px]"
+          >
             <motion.img
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

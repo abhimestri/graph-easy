@@ -20,15 +20,12 @@ interface GraphProps {
 }
 
 const Graph = ({ type, watch }: GraphProps) => {
-  const [graphData, setGraphData] = useState<any>();
+  const [_graphData, setGraphData] = useState<any>();
 
   useEffect(() => {
     const updatedData = watch()?.dataValues.map((data: any) => data);
     setGraphData([...updatedData]);
   }, [watch]);
-
-  console.log(watch()?.dataValues);
-  console.log({ graphData });
 
   switch (type) {
     case "Bar":

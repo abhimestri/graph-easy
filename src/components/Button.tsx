@@ -4,7 +4,7 @@ import RightArrow from "../assets/RightArrow.svg";
 
 interface ButtonProps {
   title?: string;
-  onClick: () => void;
+  onClick: (e?: any) => void;
   icon?: any;
   variant?:
     | "primary"
