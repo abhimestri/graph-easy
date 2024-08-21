@@ -9,17 +9,19 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { delay, motion } from "framer-motion";
 
 import { ReactComponent as RightArrow } from "../assets/BlackRightArr.svg";
+import GraphDataForm from "./GraphDataForm";
 
 interface SideBarFormProps {
-  currentGraphType: GraphTypes;
+  currentGraphType: GraphTypes["types"];
   fields: any[];
   append: any;
   remove: any;
   register: any;
   reset: any;
-  setIsSideBarExtended: (data: boolean) => void;
   isSideBarExtended?: boolean;
+  setIsSideBarExtended: (data: boolean) => void;
   handleFileUpload: (e?: any) => void;
+  setExpandDataTable: (data: boolean) => void;
 }
 
 const SideBarForm = ({
@@ -32,6 +34,7 @@ const SideBarForm = ({
   isSideBarExtended,
   setIsSideBarExtended,
   handleFileUpload,
+  setExpandDataTable,
 }: SideBarFormProps) => {
   return (
     <motion.div
@@ -66,7 +69,7 @@ const SideBarForm = ({
           className="text-center montserrat text-2xl py-4 px-6"
         >
           <Button
-            onClick={() => null}
+            onClick={() => setExpandDataTable(true)}
             variant="white-outlined"
             className="w-full h-[40px] text-[13px]"
           >
@@ -74,7 +77,7 @@ const SideBarForm = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1, duration: 0.4 }}
-              className="p-0 m-0"
+              className="p-0 m-0 text-[1.2vw]"
             >
               Expand data table
             </motion.p>
@@ -104,47 +107,76 @@ const SideBarForm = ({
         transition={{ delay: 0.2, duration: 0.5 }}
         className="max-h-[70vh] p-[10px] overflow-scroll rounded-[6px] border-extralight border-[1px] border-solid"
       >
-        <CustomTable
+        <GraphDataForm
           fields={fields}
           register={register}
           append={append}
           remove={remove}
-          data={[]}
-          columns={[]}
+          currentGraphType={currentGraphType}
+          entity={"sidebar"}
         />
+        <a
+          href={
+            currentGraphType !== "Bubble" && currentGraphType !== "Scatter"
+              ? "https://docs.google.com/spreadsheets/d/1CePhzrGZ0Z0Du59KV2mI-4m0lCwwydjCmsqDQFmbCXY/edit?usp=sharing"
+              : "https://docs.google.com/spreadsheets/d/1ElqK-0D-_31MVAkvD5DSweJWzBGbsry82Y1e9ZZO2z8/edit?usp=sharing"
+          }
+          target="_blank"
+          rel="noreferrer"
+          className="text-link text-[14px] pl-[8px] underline cursor-pointer"
+        >
+          Download sample excel sheet
+        </a>
       </motion.div>
       <div className="flex justify-center absolute top-[90%] mt-[8px] gap-x-6">
         {isSideBarExtended ? (
           <>
-            <Button
-              variant={"primary"}
-              onClick={() => null}
-              className="px-[2vh] py-[1px]"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.4 }}
+              className="p-0 m-0"
             >
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1, duration: 0.4 }}
-                className="p-0 m-0"
+              <Button
+                variant={"primary"}
+                onClick={() => null}
+                className="!px-[1.4vw] py-[1px]"
               >
-                <input
-                  id="file-upload"
-                  type="file"
-                  hidden
-                  onChange={handleFileUpload}
-                />
-                <label htmlFor="file-upload" className="cursor-pointer">
-                  Upload Excel
-                </label>
-              </motion.p>
-            </Button>
-            <Button
-              variant={"white-outlined"}
-              onClick={() => reset()}
-              className="px-[3vh] py-[11px]"
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.1, duration: 0.4 }}
+                  className="p-0 m-0"
+                >
+                  <input
+                    id="file-upload"
+                    type="file"
+                    hidden
+                    onChange={handleFileUpload}
+                  />
+                  <label
+                    htmlFor="file-upload"
+                    className="cursor-pointer text-[1.1vw]"
+                  >
+                    Upload Excel
+                  </label>
+                </motion.p>
+              </Button>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.4 }}
+              className="p-0 m-0"
             >
-              Clear data
-            </Button>
+              <Button
+                variant={"white-outlined"}
+                onClick={() => reset()}
+                className="!px-[1.4vw] py-[1px] text-[1.1vw]"
+              >
+                Clear data
+              </Button>
+            </motion.div>
           </>
         ) : (
           <Button

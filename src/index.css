@@ -12,6 +12,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(253, 253, 253);
+  font-family: "montserrat";
 }
 
 code {
@@ -55,4 +56,35 @@ code {
   border-radius: 50%;
   z-index: -1;
   filter: blur(16px);
+}
+
+.modal-style {
+  @apply h-0 flex justify-end;
+}
+.modal-close-icon {
+  @apply cursor-pointer;
+}
+.modal-body {
+  @apply p-[20px] w-[40vw] max-h-[70vh] overflow-scroll mt-8 pt-0;
+}
+
+.form-input-style {
+  @apply montserrat !max-w-[6vw] !px-[6px] !py-[10px] !border-solid !rounded-[6px] border-lightgrey border-[1px];
+}
+.extended-form-input {
+  @apply montserrat !max-w-[16vw] !px-[6px] !py-[10px] !border-solid !rounded-[6px] border-lightgrey border-[1px];
+}
+.form-remove-field-btn {
+  @apply px-[6px] py-[10px] !border-none bg-white cursor-pointer;
+}
+
+.table-form-body {
+  @apply max-h-[68vh] overflow-scroll w-full;
+}
+
+.primary-btn {
+  @apply montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-primaryblue px-[4vh] py-[2vh] rounded-[4px] w-fit border-none rounded-[6px] text-white text-[16px];
+}
+.secondary-btn {
+  @apply montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-white px-[4vh] py-[2vh] rounded-[4px] w-fit border-[1px] border-solid border-extralight rounded-[6px] text-black text-[16px];
 }

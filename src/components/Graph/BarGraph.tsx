@@ -1,5 +1,7 @@
 import { Bar } from "react-chartjs-2";
 import randomColor from "randomcolor";
+import BarChart3D from "../../temp";
+import BarGraph3D from "../3D-Graph/BarGraph3D";
 
 interface BarGraphProps {
   graphData: any;
@@ -34,6 +36,10 @@ const BarGraph = ({ graphData }: BarGraphProps) => {
         responsive: true,
       }}
     />
+    // <BarGraph3D
+    //   data={data?.datasets[0]?.data}
+    //   colors={data?.datasets[0]?.backgroundColor}
+    // />
   );
 };
 

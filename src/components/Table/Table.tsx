@@ -7,6 +7,9 @@ import TableRow from "@mui/material/TableRow";
 import Button from "../Button";
 import { ReactSVG } from "react-svg";
 import { ReactComponent as CloseIcon } from "../../assets/Close.svg";
+import { getCurrentGraphAttributes } from "../../utility/form";
+import { GraphTypes } from "../../utility/utility";
+import { ReactElement } from "react";
 
 interface CustomTableProps {
   data: any[];
@@ -15,6 +18,8 @@ interface CustomTableProps {
   register: any;
   append: any;
   remove: any;
+  currentGraphType: GraphTypes["types"];
+  body: ReactElement;
 }
 
 const CustomTable = ({
@@ -24,6 +29,8 @@ const CustomTable = ({
   register,
   append,
   remove,
+  currentGraphType,
+  body,
 }: CustomTableProps) => {
   return (
     <div>
@@ -37,8 +44,8 @@ const CustomTable = ({
                   data: "0",
                 })
               }
-              variant="secondary"
-              className="px-[10px] py-[6px] text-[0.8rem] ml-[-10px]"
+              variant="white-outlined"
+              className="secondary-btn px-[1.2vw] py-[6px] text-[0.9vw] ml-[-10px]"
             >
               {" "}
               Add a row
@@ -46,63 +53,23 @@ const CustomTable = ({
           </caption>
           <TableHead>
             <TableRow>
-              <TableCell
-                style={{
-                  paddingLeft: "12px",
-                  paddingRight: "10px",
-                  fontFamily: "montserrat",
-                }}
-                className="!montserrat"
-              >
-                Label
-              </TableCell>
-              <TableCell
-                style={{
-                  paddingLeft: "10px",
-                  paddingRight: "10px",
-                  fontFamily: "montserrat",
-                }}
-                className="!montserrat"
-              >
-                Data
-              </TableCell>
+              {columns?.map((item: any) => {
+                return (
+                  <TableCell
+                    style={{
+                      paddingLeft: "10px",
+                      paddingRight: "10px",
+                      fontFamily: "montserrat",
+                    }}
+                    className="!montserrat"
+                  >
+                    {item}
+                  </TableCell>
+                );
+              })}
             </TableRow>
           </TableHead>
-          <TableBody>
-            {fields?.map((field: any, index: any) => {
-              return (
-                <TableRow className="max-w-[6vw] p-0">
-                  <TableCell
-                    style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                  >
-                    <input
-                      className="montserrat max-w-[6vw] px-[6px] py-[10px] border-solid rounded-[6px] border-lightgrey border-[1px]"
-                      {...register(`dataValues.${index}.label`)}
-                      placeholder="label"
-                    />
-                  </TableCell>
-                  <TableCell
-                    style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                  >
-                    <input
-                      className="montserrat max-w-[6vw] px-[6px] py-[10px] border-solid rounded-[6px] border-lightgrey border-[1px]"
-                      {...register(`dataValues.${index}.data`)}
-                      placeholder="0"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      onClick={() => remove(index)}
-                      variant="white-outlined"
-                      className="px-[6px] py-[6px] border-none"
-                    >
-                      <CloseIcon style={{ fill: "#FF5139" }} />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
+          <TableBody>{body}</TableBody>
         </Table>
       </TableContainer>
     </div>

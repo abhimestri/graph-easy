@@ -10,6 +10,7 @@ module.exports = {
         extralight: "#E3E3E3",
         selectedprimary: "#6C94FF",
         danger: "#FF5139",
+        link: "#3b7fff",
       },
     },
   },

@@ -4,6 +4,7 @@ import DoughnutImg from "../assets/doughnut.png";
 import LineImg from "../assets/line.png";
 import ScatterImg from "../assets/scatter.png";
 import { useRef } from "react";
+import BarGraph3D from "../components/3D-Graph/BarGraph3D";
 
 const MainContent = () => {
   const ref = useRef<HTMLDivElement>(null);

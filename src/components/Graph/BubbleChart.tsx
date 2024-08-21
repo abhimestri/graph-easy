@@ -1,25 +1,33 @@
+import randomColor from "randomcolor";
 import React from "react";
 import { Bubble } from "react-chartjs-2";
 
-const BubbleChart = () => {
-  const labels = ["January", "February", "March", "April", "May", "June"];
+interface BubbleChartProps {
+  graphData: any[];
+}
+
+const BubbleChart = ({ graphData }: BubbleChartProps) => {
   const data = {
     datasets: [
       {
-        label: "First Dataset",
-        data: [
-          {
-            x: 20,
-            y: 30,
-            r: 45,
-          },
-          {
-            x: 40,
-            y: 10,
-            r: 10,
-          },
-        ],
-        backgroundColor: "rgb(255, 99, 132)",
+        label: "Bubble chart",
+        data: graphData?.map((data: any) => {
+          return {
+            x: data?.X,
+            y: data?.Y,
+            r: data?.R,
+          };
+        }),
+        backgroundColor: graphData?.map((item: any, index: any) => {
+          if (item[index]) {
+            return item[index];
+          } else {
+            return (item[index] = randomColor({
+              luminosity: "bright",
+              format: "rgb",
+            }));
+          }
+        }),
       },
     ],
   };
