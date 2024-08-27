@@ -1,21 +1,30 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopGraphOptionBar from "./TopGraphOptionBar";
 import SideBarForm from "./SideBarForm";
 import Graph from "../components/Graph/Graph";
 import Home from "../assets/Home.svg";
-import { GraphTypes, parseExcelData } from "../utility/utility";
+import {
+  GraphTypes,
+  handleCaptureImage,
+  parseExcelData,
+} from "../utility/utility";
 import { useFieldArray, useForm } from "react-hook-form";
 import * as XLSX from "xlsx";
 import { getFormFields } from "../utility/form";
 import CommonModal from "../components/Modal/Modal";
 import GraphDataForm from "./GraphDataForm";
+import Button from "../components/Button";
+import { ReactComponent as CaptureImageIcon } from "../assets/CaptureImageIcon.svg";
+import { BarGraphProps } from "../components/Graph/BarGraph";
 
 const GraphRenderPage = () => {
   type types = "types";
   const [currentGraphType, setCurrentGraphType] = useState<any>();
   const [isSideBarExtended, setIsSideBarExtended] = useState<boolean>(true);
   const [expandDataTable, setExpandDataTable] = useState<boolean>(false);
+  const [graphRenderType, setGraphRenderType] =
+    useState<BarGraphProps["graphRenderType"]>("2D");
 
   const navigate = useNavigate();
 
@@ -79,34 +88,41 @@ const GraphRenderPage = () => {
           handleFileUpload={handleFileUpload}
           setExpandDataTable={setExpandDataTable}
         />
-        <div className="w-[77%]">
+        <div className={`${isSideBarExtended ? "w-[77%]" : "w-[95%]"}`}>
           <TopGraphOptionBar
             setCurrentGraph={handleCurrentGraphType}
             currentGraphType={currentGraphType ?? "Bar"}
           />
-          <div className="">
-            <div className="h-[70vh] flex justify-center px-8">
-              {/* {!watch("dataValues")[0]?.data?.length &&
-            !watch("dataValues")[0]?.label?.length ? (
-              <div className="mt-20">
-                <p className="text-[30px] m-auto tet-montserrat-bold">
-                  No data found to display any graph!
-                </p>
+          <div className="px-6">
+            <div className="flex justify-end gap-x-4 my-2">
+              <Button
+                variant="white-outlined"
+                onClick={() => handleCaptureImage("graphCatureArea")}
+                className="px-[10px] py-[10px]"
+                disabled={graphRenderType === "3D"}
+              >
+                <CaptureImageIcon fill="#000" className="m-auto" />
+              </Button>
+              <Button
+                variant="white-outlined"
+                onClick={() =>
+                  setGraphRenderType(graphRenderType === "3D" ? "2D" : "3D")
+                }
+                className=" text-[12px] px-[10px] py-[10px]"
+              >
+                {graphRenderType === "3D" ? "View in 2D" : "View in 3D"}
+              </Button>
+            </div>
+            <div id="graphCatureArea">
+              <div className="h-[70vh] flex justify-center px-8">
+                <Graph
+                  getValues={getValues}
+                  type={currentGraphType ?? "Bar"}
+                  watch={watch}
+                  data={[]}
+                  graphRenderType={graphRenderType}
+                />
               </div>
-            ) : (
-              <Graph
-                getValues={getValues}
-                type={currentGraphType ?? "Bar"}
-                watch={watch}
-                data={[]}
-              />
-            )} */}
-              <Graph
-                getValues={getValues}
-                type={currentGraphType ?? "Bar"}
-                watch={watch}
-                data={[]}
-              />
             </div>
           </div>
         </div>

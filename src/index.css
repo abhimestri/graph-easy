@@ -58,6 +58,24 @@ code {
   filter: blur(16px);
 }
 
+.floating3D {
+  box-shadow: 1px;
+  position: relative;
+}
+.floating3D::before {
+  content: "";
+  position: absolute;
+  bottom: "-50px";
+  left: -2%;
+  top: 70%;
+  width: 80%;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(16px);
+}
+
 .modal-style {
   @apply h-0 flex justify-end;
 }
@@ -87,4 +105,10 @@ code {
 }
 .secondary-btn {
   @apply montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-white px-[4vh] py-[2vh] rounded-[4px] w-fit border-[1px] border-solid border-extralight rounded-[6px] text-black text-[16px];
+}
+
+.inner-box-shadow {
+  -webkit-box-shadow: inset -1px -1px 94px -78px rgba(0, 0, 0, 0.64);
+  -moz-box-shadow: inset -1px -1px 94px -78px rgba(0, 0, 0, 0.64);
+  box-shadow: inset -1px -1px 94px -78px rgba(0, 0, 0, 0.64);
 }

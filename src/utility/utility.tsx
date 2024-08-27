@@ -1,3 +1,4 @@
+import html2canvas from "html2canvas";
 import * as XLSX from "xlsx";
 
 export interface GraphTypes {
@@ -53,4 +54,16 @@ export const parseExcelData = (
     });
   }
   return dt;
+};
+
+export const handleCaptureImage = (id: string) => {
+  const element = document.getElementById(id); // Get the element you want to capture
+
+  html2canvas(element).then((canvas) => {
+    const imgData = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.href = imgData;
+    link.download = "graph-snapshot.png";
+    link.click();
+  });
 };

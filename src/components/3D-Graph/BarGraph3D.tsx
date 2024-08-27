@@ -1,43 +1,69 @@
-import React from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import React, { useMemo } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
+import { OrbitControls, Line } from "@react-three/drei";
 import * as THREE from "three";
 
-const Bar = ({ position, height, color }) => {
+const Bar = ({ position, args, color }: any) => {
+  // Create a memoized geometry
+  const geometry = useMemo(() => new THREE.BoxGeometry(...args), [args]);
+  // Create a memoized material
+  const material = useMemo(
+    () => new THREE.MeshStandardMaterial({ color }),
+    [color]
+  );
+
+  return <mesh position={position} geometry={geometry} material={material} />;
+};
+
+const Axis = ({ data }) => {
+  const xlength = data?.length + 35;
+  const ylength = Math.max(...data) + 5;
   return (
-    <mesh position={position}>
-      <boxGeometry args={[1, height, 1]} />
-      <meshStandardMaterial color={color} />
-    </mesh>
+    <>
+      <Line
+        points={[
+          [0, 0, 0],
+          [xlength, 0, 0],
+        ]}
+        color={"green"}
+        lineWidth={1}
+      />
+      <Line
+        points={[
+          [0, 0, 0],
+          [0, ylength, 0],
+        ]}
+        color={"blue"}
+        lineWidth={1}
+      />
+    </>
   );
 };
 
-const BarGraph3D = ({ data, colors }) => {
-  // const data = [5, 10, 7, 3, 6]; // Example data
-  // const colors = ["#8BC34A", "#FFC107", "#00BCD4", "#E91E63", "#3F51B5"]; // Colors for each bar
-
+const BarGraph3D = ({
+  data,
+  colors = ["red", "green", "yellow", "blue", "pink", "violet"],
+}) => {
   return (
     <Canvas
-      camera={{ position: [0, -60, 30], fov: 30 }}
-      style={{ marginTop: "30px", background: "#ccc" }}
+      camera={{
+        fov: 90,
+        aspect: window.innerWidth / window.innerHeight,
+        position: 10,
+      }}
     >
-      {/* Ambient Light */}
-      <ambientLight intensity={0.5} />
-      {/* Directional Light */}
-      <directionalLight position={[10, 10, 5]} intensity={1} />
-
-      {/* Generate Bars */}
-      {data.map((value, index) => (
+      <ambientLight intensity={3} />
+      <pointLight position={[10, 10, 10]} />
+      {data.map((value: any, index: any) => (
         <Bar
           key={index}
-          position={[index * 2 - data.length, value / 2, 0]} // Adjust the position of each bar
-          height={value} // Height of the bar based on data
-          color={colors[index % colors.length]} // Assign color to each bar
+          position={[index * 4, value / 2, 0]}
+          args={[2, value, 2]}
+          color={colors[index % colors.length]}
         />
       ))}
-
-      {/* Add Orbit Controls to rotate around the graph */}
       <OrbitControls />
+      <Axis data={data} />
     </Canvas>
   );
 };

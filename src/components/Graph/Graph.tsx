@@ -1,5 +1,5 @@
 import { GraphTypes } from "../../utility/utility";
-import BarGraph from "./BarGraph";
+import BarGraph, { BarGraphProps } from "./BarGraph";
 import BubbleChart from "./BubbleChart";
 import DoughnutChart from "./DoughnutChart";
 import LineGraph from "./LineGraph";
@@ -10,18 +10,26 @@ import ScatterGraph from "./ScatterGraph";
 
 type attr = "types";
 
+export interface GraphRenderType {
+  type: "2D" | "3D";
+}
+
 interface GraphProps {
   type: GraphTypes[attr];
   data: any;
   getValues: any;
   watch: any;
+  graphRenderType: GraphRenderType["type"];
 }
 
-const Graph = ({ type, watch }: GraphProps) => {
+const Graph = ({ type, watch, graphRenderType }: GraphProps) => {
   switch (type) {
     case "Bar":
       return (
-        <BarGraph graphData={watch()?.dataValues.map((data: any) => data)} />
+        <BarGraph
+          graphData={watch()?.dataValues.map((data: any) => data)}
+          graphRenderType={graphRenderType}
+        />
       );
     case "Bubble":
       return (

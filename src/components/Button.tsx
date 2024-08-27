@@ -13,6 +13,7 @@ interface ButtonProps {
     | "white-outlined"
     | "danger";
   className?: any;
+  disabled?: boolean;
 }
 
 type PropsWithChildren = React.PropsWithChildren<ButtonProps>;
@@ -23,6 +24,7 @@ const Button: React.FC<PropsWithChildren> = ({
   variant,
   children,
   className,
+  disabled = false,
 }) => {
   //   const { onClick } = props;
 
@@ -32,8 +34,11 @@ const Button: React.FC<PropsWithChildren> = ({
         <motion.button
           whileHover={{ scale: 1.07 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          className={`montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-primaryblue px-[4vh] py-[2vh] rounded-[4px] w-fit border-none rounded-[6px] text-white text-[16px] ${className}`}
-          onClick={onClick}
+          className={`montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-primaryblue px-[4vh] py-[2vh] rounded-[4px] w-fit border-none rounded-[6px] text-white text-[16px] ${className} ${
+            disabled ? "opacity-[0.4] cursor-not-allowed" : ""
+          }`}
+          onClick={!disabled && onClick}
+          disabled={disabled}
         >
           {children}
           <img
@@ -48,8 +53,11 @@ const Button: React.FC<PropsWithChildren> = ({
         <motion.button
           whileHover={{ scale: 1.05 }}
           transition={{ delay: 0.2, duration: 0.2 }}
-          className={`${className} montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-primaryblue px-[4vh] py-[2vh] rounded-[4px] w-fit border-none rounded-[6px] text-white text-[16px]`}
-          onClick={onClick}
+          className={`${className} montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-primaryblue px-[4vh] py-[2vh] rounded-[4px] w-fit border-none rounded-[6px] text-white text-[16px] ${
+            disabled ? "opacity-[0.4] cursor-not-allowed" : ""
+          }`}
+          onClick={!disabled && onClick}
+          disabled={disabled}
         >
           {children}
         </motion.button>
@@ -59,8 +67,11 @@ const Button: React.FC<PropsWithChildren> = ({
         <motion.button
           whileHover={{ scale: 1.01 }}
           transition={{ delay: 0.2, duration: 0.2 }}
-          className={`${className} montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-white px-[4vh] py-[2vh] rounded-[4px] w-fit border-[1px] border-solid border-extralight rounded-[6px] text-black text-[16px]`}
-          onClick={onClick}
+          className={`${className} montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-white px-[4vh] py-[2vh] rounded-[4px] w-fit border-[1px] border-solid border-extralight rounded-[6px] text-black text-[16px] ${
+            disabled ? "opacity-[0.4] cursor-not-allowed" : ""
+          }`}
+          onClick={!disabled && onClick}
+          disabled={disabled}
         >
           {children}
         </motion.button>
@@ -81,8 +92,11 @@ const Button: React.FC<PropsWithChildren> = ({
         <motion.button
           whileHover={{ scale: 1.07 }}
           transition={{ delay: 0.4, duration: 0.4 }}
-          className={`montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-primaryblue px-[4vh] py-[2vh] rounded-[4px] w-fit border-none rounded-[6px] text-white text-[16px] ${className}`}
-          onClick={onClick}
+          className={`montserrat flex items-center justify-center gap-x-4 cursor-pointer bg-primaryblue px-[4vh] py-[2vh] rounded-[4px] w-fit border-none rounded-[6px] text-white text-[16px] ${className} ${
+            disabled ? "opacity-[0.4] cursor-not-allowed" : ""
+          }`}
+          onClick={!disabled && onClick}
+          disabled={disabled}
         >
           {children}
         </motion.button>
